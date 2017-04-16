@@ -1,25 +1,25 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
 
-interface ITodoTextInputProps {
+interface ITechNameInputProps {
   onSave: (text: string) => void;
   text?: string;
   placeholder?: string;
   editing?: boolean;
-  newTodo?: boolean;
+  newTech?: boolean;
 };
 
-interface ITodoTextInputState {
+interface ITechNameInputState {
   text: string;
 };
 
-class TodoTextInput extends React.Component<ITodoTextInputProps, ITodoTextInputState> {
+class TechNameInput extends React.Component<ITechNameInputProps, ITechNameInputState> {
   static propTypes = {
     onSave: React.PropTypes.func.isRequired,
     text: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     editing: React.PropTypes.bool,
-    newTodo: React.PropTypes.bool
+    newTech: React.PropTypes.bool
   };
 
   constructor(props: any, context: any) {
@@ -36,7 +36,7 @@ class TodoTextInput extends React.Component<ITodoTextInputProps, ITodoTextInputS
     const text = e.target.value.trim();
     if (e.which === 13) {
       this.props.onSave(text);
-      if (this.props.newTodo) {
+      if (this.props.newTech) {
         this.setState({text: ''});
       }
     }
@@ -47,7 +47,7 @@ class TodoTextInput extends React.Component<ITodoTextInputProps, ITodoTextInputS
   }
 
   handleBlur(e: any) {
-    if (!this.props.newTodo) {
+    if (!this.props.newTech) {
       this.props.onSave(e.target.value);
     }
   }
@@ -58,7 +58,7 @@ class TodoTextInput extends React.Component<ITodoTextInputProps, ITodoTextInputS
         className={
           classnames({
             'edit': this.props.editing,
-            'new-todo': this.props.newTodo
+            'new-todo': this.props.newTech
           })}
         type='text'
         placeholder={this.props.placeholder}
@@ -72,4 +72,4 @@ class TodoTextInput extends React.Component<ITodoTextInputProps, ITodoTextInputS
   }
 }
 
-export default TodoTextInput;
+export default TechNameInput;

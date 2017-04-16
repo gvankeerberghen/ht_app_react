@@ -12,7 +12,6 @@ interface IFooterProps {
   completedCount: number;
   activeCount: number;
   filter: string;
-  onClearCompleted: () => void;
   onShow: (filter: string) => void;
 };
 
@@ -23,7 +22,6 @@ class Footer extends React.Component<IFooterProps, IFooterState> {
     completedCount: React.PropTypes.number.isRequired,
     activeCount: React.PropTypes.number.isRequired,
     filter: React.PropTypes.string.isRequired,
-    onClearCompleted: React.PropTypes.func.isRequired,
     onShow: React.PropTypes.func.isRequired
   };
 
@@ -54,20 +52,6 @@ class Footer extends React.Component<IFooterProps, IFooterState> {
     );
   }
 
-  renderClearButton() {
-    const {completedCount, onClearCompleted} = this.props;
-    if (completedCount > 0) {
-      return (
-        <button
-          className='clear-completed'
-          onClick={onClearCompleted}
-          >
-          Clear completed
-        </button>
-      );
-    }
-  }
-
   render() {
     return (
       <footer className='footer'>
@@ -79,7 +63,6 @@ class Footer extends React.Component<IFooterProps, IFooterState> {
             </li>
           )}
         </ul>
-        {this.renderClearButton()}
       </footer>
     );
   }

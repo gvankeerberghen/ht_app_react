@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as TestUtils from 'react-addons-test-utils';
 import Header from './Header';
-import TodoTextInput from './TodoTextInput';
+import TechNameInput from './TechNameInput';
 
 function setup() {
   const props = {
-    addTodo: jasmine.createSpy('addTodo')
+    addTech: jasmine.createSpy('addTech')
   };
 
   const renderer = TestUtils.createRenderer();
@@ -30,20 +30,20 @@ describe('components', () => {
       const [h1, input] = output.props.children;
 
       expect(h1.type).toBe('h1');
-      expect(h1.props.children).toBe('todos');
+      expect(h1.props.children).toBe('Techs');
 
-      expect(input.type).toBe(TodoTextInput);
-      expect(input.props.newTodo).toBe(true);
-      expect(input.props.placeholder).toBe('What needs to be done?');
+      expect(input.type).toBe(TechNameInput);
+      expect(input.props.newTech).toBe(true);
+      expect(input.props.placeholder).toBe('What techs do you want to add?');
     });
 
-    it('should call addTodo if length of text is greater than 0', () => {
+    it('should call addTech if length of text is greater than 0', () => {
       const {output, props} = setup();
       const input = output.props.children[1];
       input.props.onSave('');
-      expect(props.addTodo.calls.count()).toBe(0);
+      expect(props.addTech.calls.count()).toBe(0);
       input.props.onSave('Use Redux');
-      expect(props.addTodo.calls.count()).toBe(1);
+      expect(props.addTech.calls.count()).toBe(1);
     });
   });
 });

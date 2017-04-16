@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as TestUtils from 'react-addons-test-utils';
-import TodoTextInput from './TodoTextInput';
+import TechNameInput from './TechNameInput';
 import {assign} from '../assign';
 
 function setup(propOverrides: any) {
@@ -9,13 +9,13 @@ function setup(propOverrides: any) {
     text: 'Use Redux',
     placeholder: 'What needs to be done?',
     editing: false,
-    newTodo: false
+    newTech: false
   }, propOverrides);
 
   const renderer = TestUtils.createRenderer();
 
   renderer.render(
-    <TodoTextInput {...props}/>
+    <TechNameInput {...props}/>
   );
 
   let output = renderer.getRenderOutput();
@@ -30,7 +30,7 @@ function setup(propOverrides: any) {
 }
 
 describe('components', () => {
-  describe('TodoTextInput', () => {
+  describe('TechNameInput', () => {
     it('should render correctly', () => {
       const {output} = setup({});
       expect(output.props.placeholder).toEqual('What needs to be done?');
@@ -43,8 +43,8 @@ describe('components', () => {
       expect(output.props.className).toEqual('edit');
     });
 
-    it('should render correctly when newTodo=true', () => {
-      const {output} = setup({newTodo: true});
+    it('should render correctly when newTech=true', () => {
+      const {output} = setup({newTech: true});
       expect(output.props.className).toEqual('new-todo');
     });
 
@@ -61,8 +61,8 @@ describe('components', () => {
       expect(props.onSave).toHaveBeenCalledWith('Use Redux');
     });
 
-    it('should reset state on return key press if newTodo', () => {
-      const {output, renderer} = setup({newTodo: true});
+    it('should reset state on return key press if newTech', () => {
+      const {output, renderer} = setup({newTech: true});
       output.props.onKeyDown({which: 13, target: {value: 'Use Redux'}});
       const updated = renderer.getRenderOutput();
       expect(updated.props.value).toEqual('');
@@ -74,8 +74,8 @@ describe('components', () => {
       expect(props.onSave).toHaveBeenCalledWith('Use Redux');
     });
 
-    it('shouldnt call onSave on blur if newTodo', () => {
-      const {output, props} = setup({newTodo: true});
+    it('shouldnt call onSave on blur if newTech', () => {
+      const {output, props} = setup({newTech: true});
       output.props.onBlur({target: {value: 'Use Redux'}});
       expect(props.onSave.calls.count()).toBe(0);
     });
