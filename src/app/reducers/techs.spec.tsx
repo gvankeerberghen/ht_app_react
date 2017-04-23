@@ -4,27 +4,13 @@ import * as types from '../constants/ActionTypes';
 describe('techs reducer', () => {
   it('should handle initial state', () => {
     expect(
-      techs(undefined, {})
-    ).toEqual([
-      {
+      techs(undefined, {})[0]
+    ).toEqual({
         id: 1,
         name: 'Elm',
         type: 'Language',
         votes: 8
-      },
-      {
-        id: 2,
-        name: 'React',
-        type: 'Web Framework',
-        votes: 5
-      },
-      {
-        id: 3,
-        name: 'React-Native',
-        type: 'Mobile Framework',
-        votes: 5
-      }
-    ]);
+      });
   });
 
   it('should handle ADD_TECH', () => {

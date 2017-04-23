@@ -23,9 +23,7 @@ class App extends React.Component<IAppProps, IAppState> {
     const {techs, actions} = this.props;
     return (
       <div>
-        <Header
-          addTech={actions.addTech}
-          />
+        <Header/>
         <MainSection
           techs={techs}
           actions={actions}

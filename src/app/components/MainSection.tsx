@@ -1,13 +1,11 @@
 import * as React from 'react';
 import TechItem from './TechItem';
+import TechListItem from './TechListItem';
 import Footer from './Footer';
 import {SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE} from '../constants/TodoFilters';
-
-const TODO_FILTERS = {
-  [SHOW_ALL]: () => true,
-  [SHOW_ACTIVE]: todo => !todo.completed,
-  [SHOW_COMPLETED]: todo => todo.completed
-};
+import List from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
 
 interface IMainProps {
   techs: any[];
@@ -15,7 +13,7 @@ interface IMainProps {
 };
 
 interface IMainState {
-  filter: string;
+  sortBy: string;
 };
 
 class MainSection extends React.Component<IMainProps, IMainState> {
@@ -26,36 +24,14 @@ class MainSection extends React.Component<IMainProps, IMainState> {
 
   constructor(props: any, context: any) {
     super(props, context);
-    this.state = {filter: SHOW_ALL};
-    this.handleShow = this.handleShow.bind(this);
-  }
-
-  handleShow(filter: string) {
-    this.setState({filter});
-  }
-
-  renderFooter(completedCount: number) {
-    const {techs} = this.props;
-    const {filter} = this.state;
-    const activeCount = techs.length - completedCount;
-
-    if (techs.length) {
-      return (
-        <Footer
-          completedCount={completedCount}
-          activeCount={activeCount}
-          filter={filter}
-          onShow={this.handleShow}
-          />
-      );
-    }
+    this.state = {sortBy: 'votes'};
   }
 
   render() {
     const {techs, actions} = this.props;
-    const {filter} = this.state;
+    const {sortBy} = this.state;
 
-    const filteredTechs = techs.filter(TODO_FILTERS[filter]);
+    techs.sort((a, b) => a[sortBy] > b[sortBy] ? -1 : 1);
     const completedCount = techs.reduce((count, tech) =>
       tech.completed ? count + 1 : count,
       0
@@ -63,16 +39,16 @@ class MainSection extends React.Component<IMainProps, IMainState> {
 
     return (
       <section className='main'>
-        <ul className='todo-list'>
-          {filteredTechs.map(tech =>
-            <TechItem
-              key={tech.id}
-              tech={tech}
-              {...actions}
-              />
-          )}
-        </ul>
-        {this.renderFooter(completedCount)}
+        <Paper>
+          <List>
+            {techs.map(tech =>
+              <TechListItem
+                key={tech.id}
+                tech={tech}
+                />
+            )}
+          </List>
+        </Paper>
       </section>
     );
   }
