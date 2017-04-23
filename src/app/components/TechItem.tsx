@@ -1,24 +1,22 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
-import TodoTextInput from './TodoTextInput';
+import TechNameInput from './TechNameInput';
 
-interface ITodoItemProps {
-  todo: any;
-  editTodo: (id: string, text: string) => void;
-  deleteTodo: (id: string) => void;
-  completeTodo: (id: string) => void;
+interface ITechItemProps {
+  tech: any;
+  editTech: (id: string, text: string) => void;
+  deleteTech: (id: string) => void;
 };
 
-interface ITodoItemState {
+interface ITechItemState {
   editing: boolean;
 };
 
-class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
+class TechItem extends React.Component<ITechItemProps, ITechItemState> {
   static propTypes = {
-    todo: React.PropTypes.object.isRequired,
-    editTodo: React.PropTypes.func.isRequired,
-    deleteTodo: React.PropTypes.func.isRequired,
-    completeTodo: React.PropTypes.func.isRequired
+    tech: React.PropTypes.object.isRequired,
+    editTech: React.PropTypes.func.isRequired,
+    deleteTech: React.PropTypes.func.isRequired,
   };
 
   constructor(props: any, context: any) {
@@ -26,41 +24,36 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
     this.state = {
       editing: false
     };
-    this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleDoubleClick = this.handleDoubleClick.bind(this);
     this.handleSave = this.handleSave.bind(this);
   }
 
-  handleChange() {
-    this.props.completeTodo(this.props.todo.id);
-  }
-
   handleClick() {
-    this.props.deleteTodo(this.props.todo.id);
+    this.props.deleteTech(this.props.tech.id);
   }
 
   handleDoubleClick() {
     this.setState({editing: true});
   }
 
-  handleSave(text: string) {
-    if (text.length === 0) {
-      this.props.deleteTodo(this.props.todo.id);
+  handleSave(name: string) {
+    if (name.length === 0) {
+      this.props.deleteTech(this.props.tech.id);
     } else {
-      this.props.editTodo(this.props.todo.id, text);
+      this.props.editTech(this.props.tech.id, name);
     }
     this.setState({editing: false});
   }
 
   render() {
-    const {todo} = this.props;
+    const {tech} = this.props;
 
     let element;
     if (this.state.editing) {
       element = (
-        <TodoTextInput
-          text={todo.text}
+        <TechNameInput
+          text={tech.name}
           editing={this.state.editing}
           onSave={this.handleSave}
           />
@@ -68,16 +61,10 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
     } else {
       element = (
         <div className='view'>
-          <input
-            className='toggle'
-            type='checkbox'
-            checked={todo.completed}
-            onChange={this.handleChange}
-            />
           <label
             onDoubleClick={this.handleDoubleClick}
             >
-            {todo.text}
+            {tech.name}
           </label>
           <button
             className='destroy'
@@ -90,7 +77,6 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
     return (
       <li
         className={classnames({
-          completed: todo.completed,
           editing: this.state.editing
         })}
         >
@@ -100,4 +86,4 @@ class TodoItem extends React.Component<ITodoItemProps, ITodoItemState> {
   }
 }
 
-export default TodoItem;
+export default TechItem;

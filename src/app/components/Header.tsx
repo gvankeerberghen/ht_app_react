@@ -1,15 +1,15 @@
 import * as React from 'react';
-import TodoTextInput from './TodoTextInput';
+import TechNameInput from './TechNameInput';
 
 interface IHeaderProps {
-  addTodo: (text: string) => void;
+  addTech: (text: string) => void;
 };
 
 interface IHeaderState {};
 
 class Header extends React.Component<IHeaderProps, IHeaderState> {
   static propTypes = {
-    addTodo: React.PropTypes.func.isRequired
+    addTech: React.PropTypes.func.isRequired
   };
   constructor(props: any) {
     super(props);
@@ -18,18 +18,18 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
 
   handleSave(text: string) {
     if (text.length !== 0) {
-      this.props.addTodo(text);
+      this.props.addTech(text);
     }
   }
 
   render() {
     return (
       <header className='header'>
-        <h1>todos</h1>
-        <TodoTextInput
-          newTodo
+        <h1>Techs</h1>
+        <TechNameInput
+          newTech
           onSave={this.handleSave}
-          placeholder='What needs to be done?'
+          placeholder='What techs do you want to add?'
           />
       </header>
     );
