@@ -5,8 +5,8 @@ import {routerReducer} from 'react-router-redux';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
-  techs: techs,
-  user: users
+  user: users,
+  techs: techs
 });
 
 export default rootReducer;
