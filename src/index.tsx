@@ -5,13 +5,17 @@ import {Provider} from 'react-redux';
 import App from './app/containers/App';
 import configureStore from './app/store/configureStore';
 import {Router, Route, browserHistory} from 'react-router';
-
+import {applyMiddleware} from 'redux';
+import {routerMiddleware, syncHistoryWithStore} from 'react-router-redux';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 injectTapEventPlugin();
 
-const store: IStore<any> = configureStore({});
+const routingMiddleware = routerMiddleware(browserHistory);
+
+const store: IStore<any> = configureStore({}, applyMiddleware(routingMiddleware));
+const history = syncHistoryWithStore(browserHistory, store)
 
 ReactDOM.render(
   <Provider store={store}>
