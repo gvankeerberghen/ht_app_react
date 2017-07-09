@@ -23,4 +23,21 @@ describe('techs actions', () => {
       name: 'Tech 2'
     });
   });
+
+  it('login should create USER_LOGGED_IN action', () => {
+    const profileObj = {
+      name: 'John Doe',
+      email: 'johnd@doe.com',
+      googleId: '1249310'
+    };
+
+    expect(actions.login(profileObj)).toEqual({
+      type: types.USER_LOGGED_IN,
+      payload: {
+        name: 'John Doe',
+        email: 'johnd@doe.com',
+        googleId: '1249310'
+      }
+    });
+  });
 });

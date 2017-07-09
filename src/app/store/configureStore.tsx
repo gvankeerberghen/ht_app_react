@@ -2,8 +2,8 @@ import {createStore} from 'redux';
 import rootReducer from '../reducers/index';
 
 declare var module: any;
-export default function configureStore(initialState: any) {
-  const store = createStore(rootReducer, initialState);
+export default function configureStore(initialState: any, middelware?: any) {
+  const store = createStore(rootReducer, initialState, middelware);
   if (module.hot) {
     // enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {
