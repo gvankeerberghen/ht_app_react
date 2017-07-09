@@ -4,8 +4,9 @@ export default function users(state: any = {}, action: any) {
   switch (action.type) {
     case USER_LOGGED_IN:
       return {
-        name: action.name,
-        email: action.email
+        id: action.payload.googleId,
+        name: action.payload.name,
+        email: action.payload.email
       };
 
     case USER_LOGGED_OUT:

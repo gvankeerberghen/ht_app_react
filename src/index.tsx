@@ -33,7 +33,6 @@ ReactDOM.render(
       <Router history={history}>
         <Route path='/' component={UserIsAuthenticated(App)}/>
         <Route path='login' component={Login}/>
-        {console.log('state', store.getState())}
       </Router>
     </MuiThemeProvider>
   </Provider>,

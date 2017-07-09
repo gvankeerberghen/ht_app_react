@@ -3,12 +3,13 @@ import {IDispatch} from '~react-redux~redux/redux';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { Link } from 'react-router';
-import { Card, CardText } from 'material-ui/Card';
+import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import {login} from '../actions/index';
 import { routerActions } from 'react-router-redux';
+import GoogleLogin from 'react-google-login';
 
 interface IMainProps {
   login?: any;
@@ -16,51 +17,38 @@ interface IMainProps {
   redirect?: any;
 };
 
-interface IMainState {
-  email: String;
-  name: String;
-};
+interface IMainState {};
 
 class Login extends React.Component<IMainProps, IMainState> {
   constructor(props: any, context: any) {
     super(props, context);
-    this.state = {
-      email: null,
-      name: null
-    };
   }
 
-  onSubmit = (e) => {
-    this.props.login(this.state.name, this.state.email);
+  onSuccess = (e) => {
+    this.props.login(e.profileObj);
     this.props.redirect(this.props.location.query.redirect || '/');
+  }
+
+  failure = (e) => {
+    console.log('Google login error', e);
   }
 
   render() {
     return (
       <Paper>
         <Card className='container'>
-          <form onSubmit={this.onSubmit}>
-            <h2 className='card-heading'>Sign in</h2>
-            <div className='field-line'>
-              <TextField
-                floatingLabelText='Name'
-                name='name'
-                onChange={(event, newValue) => this.setState({name: newValue})}
-              />
-            </div>
-
-            <div className='field-line'>
-              <TextField
-                floatingLabelText='Email'
-                name='email'
-                onChange={(event, newValue) => this.setState({email: newValue})}
-              />
-            </div>
-
-            <div className='button-line'>
-              <RaisedButton type='submit' label='Sign in' primary onClick={this.onSubmit} />
-            </div>
-          </form>
+          <CardTitle title='Let us know who you are' subtitle='Login with a Google account' />
+          <CardText>
+            To add new technologies, vote and leave your notes we'd like to know you
+          </CardText>
+          <Paper>
+            <GoogleLogin
+              clientId='915912997435-abd8tbnutgn9fheta7e6ed04hmhd50t9.apps.googleusercontent.com'
+              buttonText='Login with Google'
+              onSuccess={this.onSuccess}
+              onFailure={this.failure}
+            />
+          </Paper>
         </Card>
       </Paper>
     );
