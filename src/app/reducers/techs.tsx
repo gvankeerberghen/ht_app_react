@@ -1,4 +1,4 @@
-import {ADD_TECH, DELETE_TECH, EDIT_TECH} from '../constants/ActionTypes';
+import {ADD_TECH, DELETE_TECH, EDIT_TECH, ADD_VOTE, REMOVE_VOTE} from '../constants/ActionTypes';
 import {assign} from '../assign';
 
 const initialState = [
@@ -6,127 +6,166 @@ const initialState = [
     id: 1,
     name: 'Elm',
     type: 'Language',
-    votes: 8
+    votes: [
+      '117572460453417284894',
+      '117572460453417284895',
+      '117572460453417284896',
+      '117572460453417284897',
+      '117572460453417284898',
+      '117572460453417284899',
+      '117572460453417284900',
+      '117572460453417284901'
+    ]
   },
   {
     id: 2,
     name: 'React',
     type: 'Web Framework',
-    votes: 5
+    votes: [
+      '117572460453417284894',
+      '117572460453417284895',
+      '117572460453417284896',
+      '117572460453417284897',
+      '117572460453417284898'
+    ]
   },
   {
     id: 3,
     name: 'React-Native',
     type: 'Mobile Framework',
-    votes: 5
+    votes: [
+      '117572460453417284894',
+      '117572460453417284895',
+      '117572460453417284896',
+      '117572460453417284897',
+      '117572460453417284898'
+    ]
   },
   {
     id: 4,
     name: 'Firebase',
     type: 'Mobile App dev Platform',
-    votes: 4
+    votes: [
+      '117572460453417284894',
+      '117572460453417284895',
+      '117572460453417284896',
+      '117572460453417284897'
+    ]
   },
   {
     id: 5,
     name: 'Graph QL',
     type: 'API query language',
-    votes: 3
+    votes: [
+      '117572460453417284894',
+      '117572460453417284895',
+      '117572460453417284896'
+    ]
   },
   {
     id: 6,
     name: 'Phoenix',
     type: 'Web Framework',
-    votes: 2
+    votes: [
+      '117572460453417284894',
+      '117572460453417284895'
+    ]
   },
   {
     id: 7,
     name: 'MapBox',
     type: 'Library / Mapping platform',
-    votes: 1
+    votes: [
+      '117572460453417284894'
+    ]
   },
   {
     id: 8,
     name: 'Scala js',
     type: 'Language',
-    votes: 1
+    votes: [
+      '117572460453417284894'
+    ]
   },
   {
     id: 9,
     name: 'Go',
     type: 'Language',
-    votes: 0
+    votes: []
   },
   {
     id: 10,
     name: 'Ionic 2',
     type: 'Mobile App dev Platform',
-    votes: 0
+    votes: []
   },
   {
     id: 11,
     name: 'Angular 2.0',
     type: 'Web & Mobile Framework',
-    votes: 0
+    votes: []
   },
   {
     id: 12,
     name: 'Play',
     type: 'Framework (Scala & Java)',
-    votes: 1
+    votes: [
+      '117572460453417284894'
+    ]
   },
   {
     id: 13,
     name: 'Web Assembly',
     type: 'Language',
-    votes: 0
+    votes: []
   },
   {
     id: 14,
     name: 'A-Frame',
     type: 'Framework for VR',
-    votes: 0
+    votes: []
   },
   {
     id: 15,
     name: 'Protocol Buffer',
     type: 'Library (serialization)',
-    votes: 0
+    votes: []
   },
   {
     id: 16,
     name: 'Falcor',
     type: 'Library (data fetching)',
-    votes: 0
+    votes: []
   },
   {
     id: 17,
     name: 'Elixir',
     type: 'Language',
-    votes: 0
+    votes: []
   },
   {
     id: 18,
     name: 'Ant Design',
     type: 'UI design language',
-    votes: 0
+    votes: []
   },
   {
     id: 19,
     name: 'Electron',
     type: 'Cross platform desktop app framework',
-    votes: 0
+    votes: []
   },
   {
     id: 20,
     name: 'Deck GL',
     type: 'Library (data viz based on web GL)',
-    votes: 0
+    votes: []
   },
   {
     id: 21,
     name: 'Vue',
     type: 'Web Framework',
-    votes: 0
+    votes: []
   }
 ];
 
@@ -138,7 +177,7 @@ export default function techs(state: any = initialState, action: any) {
           id: state.reduce((maxId, tech) => Math.max(tech.id, maxId), -1) + 1,
           name: action.name,
           type: '',
-          votes: 0
+          votes: []
         },
         ...state
       ];
@@ -152,6 +191,20 @@ export default function techs(state: any = initialState, action: any) {
       return state.map(tech =>
         tech.id === action.id ?
           assign({}, tech, {name: action.name}) :
+          tech
+      );
+
+    case ADD_VOTE:
+      return state.map(tech =>
+        tech.id === action.techId ?
+          assign({}, tech, {votes: [action.userId, ...tech.votes]}) :
+          tech
+      );
+
+    case REMOVE_VOTE:
+      return state.map(tech =>
+        tech.id === action.techId ?
+          assign({}, tech, {votes: tech.votes.filter( (vote_id) => vote_id !== action.userId )} ) :
           tech
       );
 

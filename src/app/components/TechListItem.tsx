@@ -3,6 +3,8 @@ import * as classnames from 'classnames';
 import TechNameInput from './TechNameInput';
 import {List, ListItem} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
 
 import {
   blue300,
@@ -14,7 +16,10 @@ import {
 } from 'material-ui/styles/colors';
 
 interface ITechItemProps {
+  userId: string;
   tech: any;
+  addVote: (usedId: string, techId: number) => void;
+  removeVote: (usedId: string, techId: number) => void;
 };
 
 interface ITechListItemState {};
@@ -28,8 +33,24 @@ class TechListItem extends React.Component<ITechItemProps, ITechListItemState> {
     super(props, context);
   }
 
+  hasUserVote = () => {
+    return this.props.tech.votes.indexOf(this.props.userId) > -1;
+  }
+
+  onClick = () => {
+    const techId = this.props.tech.id;
+    const userId = this.props.userId;
+
+    if (this.hasUserVote()) {
+      this.props.removeVote(userId, techId);
+    } else {
+      this.props.addVote(userId, techId);
+    }
+  }
+ 
   render() {
     const {tech} = this.props;
+    const hasUserVote = this.hasUserVote();
 
     return (
         <ListItem
@@ -39,8 +60,15 @@ class TechListItem extends React.Component<ITechItemProps, ITechListItemState> {
             <Avatar
               size={30}
             >
-              {tech.votes}
+              {tech.votes.length}
             </Avatar>
+          }
+          rightIconButton={
+            <IconButton
+              onClick={this.onClick}
+            >
+              <FontIcon className="material-icons">{hasUserVote ? 'clear' : 'add'}</FontIcon>
+            </IconButton>
           }
         />
     );

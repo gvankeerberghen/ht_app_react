@@ -8,13 +8,12 @@ import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 
 interface IMainProps {
+  userId: string;
   techs: any[];
   actions: any;
 };
 
-interface IMainState {
-  sortBy: string;
-};
+interface IMainState {};
 
 class MainSection extends React.Component<IMainProps, IMainState> {
   static propTypes = {
@@ -24,14 +23,12 @@ class MainSection extends React.Component<IMainProps, IMainState> {
 
   constructor(props: any, context: any) {
     super(props, context);
-    this.state = {sortBy: 'votes'};
   }
 
   render() {
-    const {techs, actions} = this.props;
-    const {sortBy} = this.state;
+    const {userId, techs, actions} = this.props;
 
-    techs.sort((a, b) => a[sortBy] > b[sortBy] ? -1 : 1);
+    techs.sort((a, b) => a.votes.length > b.votes.length ? -1 : 1);
     const completedCount = techs.reduce((count, tech) =>
       tech.completed ? count + 1 : count,
       0
@@ -44,7 +41,10 @@ class MainSection extends React.Component<IMainProps, IMainState> {
             {techs.map(tech =>
               <TechListItem
                 key={tech.id}
+                userId={userId}
                 tech={tech}
+                addVote={actions.addVote}
+                removeVote={actions.removeVote}
                 />
             )}
           </List>

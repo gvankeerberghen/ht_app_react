@@ -10,12 +10,17 @@ function setup(propOverrides: any) {
         id: 0,
         name: 'Tech 0',
         type: '',
-        votes: 0
+        votes: []
       }, {
         id: 1,
         name: 'Tech 1',
         type: '',
-        votes: 1
+        votes: [1000, 5001]
+      } , {
+        id: 2,
+        name: 'Tech 2',
+        type: '',
+        votes: [1000]
       }
     ],
     actions: {}
@@ -49,20 +54,20 @@ describe('components', () => {
         const list = paper.props.children;
 
         const listItems = list.props.children;
-        expect(listItems.length).toEqual(2, 'does not contain the 2 techs');
+        expect(listItems.length).toEqual(3, 'does not contain the 3 techs');
 
         expect(listItems[0].props.tech).toEqual({
           id: 1,
           name: 'Tech 1',
           type: '',
-          votes: 1
+          votes: [1000, 5001]
         });
 
-        expect(listItems[1].props.tech).toEqual({
+        expect(listItems[2].props.tech).toEqual({
           id: 0,
           name: 'Tech 0',
           type: '',
-          votes: 0
+          votes: []
         });
       });
     });

@@ -4,12 +4,15 @@ import TechListItem from './TechListItem';
 
 function setup() {
   const props = {
+    userId: '10',
     tech: {
       id: 0,
       name: 'Redux',
       type: 'A tech',
-      votes: 42
-    }
+      votes: ['1001']
+    },
+    addVote: jasmine.createSpy('addVote'),
+    removeVote: jasmine.createSpy('removeVote')
   };
 
   const renderer = TestUtils.createRenderer();
@@ -42,7 +45,7 @@ describe('components', () => {
       const {output} = setup();
 
       expect(output.props.leftAvatar.props).toEqual(jasmine.objectContaining({
-        children: 42
+        children: 1
       }));
     });
   });
