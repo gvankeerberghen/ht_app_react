@@ -1,20 +1,17 @@
 import * as React from 'react';
-import TechItem from './TechItem';
 import TechListItem from './TechListItem';
-import Footer from './Footer';
 import {SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE} from '../constants/TodoFilters';
 import List from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 
 interface IMainProps {
+  userId: string;
   techs: any[];
   actions: any;
 };
 
-interface IMainState {
-  sortBy: string;
-};
+interface IMainState {};
 
 class MainSection extends React.Component<IMainProps, IMainState> {
   static propTypes = {
@@ -24,14 +21,23 @@ class MainSection extends React.Component<IMainProps, IMainState> {
 
   constructor(props: any, context: any) {
     super(props, context);
-    this.state = {sortBy: 'votes'};
   }
 
   render() {
-    const {techs, actions} = this.props;
-    const {sortBy} = this.state;
+    const {userId, techs, actions} = this.props;
 
-    techs.sort((a, b) => a[sortBy] > b[sortBy] ? -1 : 1);
+    techs.sort((a, b) => {
+      if (a.votes.length > b.votes.length) {
+        return -1;
+      } else if (a.votes.length < b.votes.length) {
+        return 1;
+      } else if (a.name > b.name) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+
     const completedCount = techs.reduce((count, tech) =>
       tech.completed ? count + 1 : count,
       0
@@ -44,7 +50,9 @@ class MainSection extends React.Component<IMainProps, IMainState> {
             {techs.map(tech =>
               <TechListItem
                 key={tech.id}
+                userId={userId}
                 tech={tech}
+                switchVote={actions.switchVote}
                 />
             )}
           </List>

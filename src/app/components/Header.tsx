@@ -15,7 +15,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
     return (
       <AppBar
           showMenuIconButton={false}
-          title='HackerTeam Web Techs to explore'
+          title='Web Techs to explore'
         />
     );
   }

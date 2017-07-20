@@ -4,9 +4,10 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
-import {addTech, deleteTech, editTech} from '../actions/index';
+import {addTech, deleteTech, editTech, switchVote} from '../actions/index';
 
 interface IAppProps {
+  userId: string;
   techs?: any[];
   actions?: any;
 }
@@ -20,11 +21,12 @@ class App extends React.Component<IAppProps, IAppState> {
   };
 
   render() {
-    const {techs, actions} = this.props;
+    const {userId, techs, actions} = this.props;
     return (
       <div>
         <Header/>
         <MainSection
+          userId={userId}
           techs={techs}
           actions={actions}
           />
@@ -35,6 +37,7 @@ class App extends React.Component<IAppProps, IAppState> {
 
 function mapStateToProps(state: any) {
   return {
+    userId: state.user.id,
     techs: state.techs
   };
 }
@@ -44,7 +47,8 @@ function mapDispatchToProps(dispatch: IDispatch) {
     actions: bindActionCreators({
       addTech,
       deleteTech,
-      editTech
+      editTech,
+      switchVote
     }, dispatch)
   };
 }

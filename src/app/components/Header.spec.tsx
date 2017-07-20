@@ -20,7 +20,7 @@ describe('components', () => {
       const {output} = setup();
 
       expect(output.type).toBe(AppBar);
-      expect(output.props.title).toBe('HackerTeam Web Techs to explore');
+      expect(output.props.title).toBe('Web Techs to explore');
     });
   });
 });
