@@ -24,6 +24,14 @@ describe('techs actions', () => {
     });
   });
 
+  it('switchVote should create SWITCH_VOTE action', () => {
+    expect(actions.switchVote('1', 10)).toEqual({
+      type: types.SWITCH_VOTE,
+      userId: '1',
+      techId: 10
+    });
+  });
+
   it('login should create USER_LOGGED_IN action', () => {
     const profileObj = {
       name: 'John Doe',

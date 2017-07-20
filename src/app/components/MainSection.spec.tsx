@@ -11,16 +11,25 @@ function setup(propOverrides: any) {
         name: 'Tech 0',
         type: '',
         votes: []
-      }, {
+      },
+      {
         id: 1,
         name: 'Tech 1',
         type: '',
         votes: [1000, 5001]
-      } , {
+      },
+      {
         id: 2,
-        name: 'Tech 2',
+        name: 'Tech B',
         type: '',
         votes: [1000]
+      }
+      ,
+      {
+        id: 3,
+        name: 'Tech A',
+        type: '',
+        votes: [2000]
       }
     ],
     actions: {}
@@ -46,7 +55,7 @@ describe('components', () => {
     });
 
     describe('tech list', () => {
-      it('should render the techs in descending vote order', () => {
+      it('should render the techs in descending vote then name order', () => {
         const {output, props} = setup({});
 
         const paper = output.props.children;
@@ -54,7 +63,7 @@ describe('components', () => {
         const list = paper.props.children;
 
         const listItems = list.props.children;
-        expect(listItems.length).toEqual(3, 'does not contain the 3 techs');
+        expect(listItems.length).toEqual(4, 'does not contain the 4 techs');
 
         expect(listItems[0].props.tech).toEqual({
           id: 1,
@@ -63,7 +72,21 @@ describe('components', () => {
           votes: [1000, 5001]
         });
 
+        expect(listItems[1].props.tech).toEqual({
+          id: 3,
+          name: 'Tech A',
+          type: '',
+          votes: [2000]
+        });
+
         expect(listItems[2].props.tech).toEqual({
+          id: 2,
+          name: 'Tech B',
+          type: '',
+          votes: [1000]
+        });
+
+        expect(listItems[3].props.tech).toEqual({
           id: 0,
           name: 'Tech 0',
           type: '',
