@@ -1,4 +1,4 @@
-import {ADD_TECH, DELETE_TECH, EDIT_TECH, ADD_VOTE, REMOVE_VOTE} from '../constants/ActionTypes';
+import {ADD_TECH, DELETE_TECH, EDIT_TECH, SWITCH_VOTE} from '../constants/ActionTypes';
 import {assign} from '../assign';
 
 const initialState = [
@@ -169,6 +169,14 @@ const initialState = [
   }
 ];
 
+function switchVote(userId: string, voteList: Array<string>) {
+  if (voteList.indexOf(userId) > -1) {
+    return voteList.filter( (vote_id) => vote_id !== userId );
+  } else {
+    return [userId, ...voteList];
+  }
+}
+
 export default function techs(state: any = initialState, action: any) {
   switch (action.type) {
     case ADD_TECH:
@@ -194,17 +202,10 @@ export default function techs(state: any = initialState, action: any) {
           tech
       );
 
-    case ADD_VOTE:
+    case SWITCH_VOTE:
       return state.map(tech =>
         tech.id === action.techId ?
-          assign({}, tech, {votes: [action.userId, ...tech.votes]}) :
-          tech
-      );
-
-    case REMOVE_VOTE:
-      return state.map(tech =>
-        tech.id === action.techId ?
-          assign({}, tech, {votes: tech.votes.filter( (vote_id) => vote_id !== action.userId )} ) :
+          assign({}, tech, {votes: switchVote(action.userId, tech.votes)}) :
           tech
       );
 

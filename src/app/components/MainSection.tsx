@@ -1,7 +1,5 @@
 import * as React from 'react';
-import TechItem from './TechItem';
 import TechListItem from './TechListItem';
-import Footer from './Footer';
 import {SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE} from '../constants/TodoFilters';
 import List from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -28,7 +26,18 @@ class MainSection extends React.Component<IMainProps, IMainState> {
   render() {
     const {userId, techs, actions} = this.props;
 
-    techs.sort((a, b) => a.votes.length > b.votes.length ? -1 : 1);
+    techs.sort((a, b) => {
+      if (a.votes.length > b.votes.length) {
+        return -1;
+      } else if (a.votes.length < b.votes.length) {
+        return 1;
+      } else if (a.name > b.name) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+
     const completedCount = techs.reduce((count, tech) =>
       tech.completed ? count + 1 : count,
       0
@@ -43,8 +52,7 @@ class MainSection extends React.Component<IMainProps, IMainState> {
                 key={tech.id}
                 userId={userId}
                 tech={tech}
-                addVote={actions.addVote}
-                removeVote={actions.removeVote}
+                switchVote={actions.switchVote}
                 />
             )}
           </List>

@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
-import {addTech, deleteTech, editTech, addVote, removeVote} from '../actions/index';
+import {addTech, deleteTech, editTech, switchVote} from '../actions/index';
 
 interface IAppProps {
   userId: string;
@@ -48,8 +48,7 @@ function mapDispatchToProps(dispatch: IDispatch) {
       addTech,
       deleteTech,
       editTech,
-      addVote,
-      removeVote
+      switchVote
     }, dispatch)
   };
 }

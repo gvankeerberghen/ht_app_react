@@ -64,7 +64,7 @@ describe('techs reducer', () => {
     ]);
   });
 
-  it('should handle ADD_VOTE', () => {
+  it('should handle SWICTH_VOTE to add votes', () => {
     expect(
       techs([
         {
@@ -74,16 +74,16 @@ describe('techs reducer', () => {
           votes: []
         }
       ], {
-        type: types.ADD_VOTE,
+        type: types.SWITCH_VOTE,
         techId: 0,
-        userId: 1
+        userId: '1'
       })
     ).toEqual([
         {
           id: 0,
           name: 'Initial',
           type: 'init',
-          votes: [1]
+          votes: ['1']
         }
       ]);
 
@@ -93,48 +93,48 @@ describe('techs reducer', () => {
           id: 0,
           name: 'Initial',
           type: 'init',
-          votes: [1]
+          votes: ['1']
         },
         {
           id: 2,
           name: 't2',
           type: 'type',
-          votes: [11]
+          votes: ['11']
         }
       ], {
-        type: types.ADD_VOTE,
+        type: types.SWITCH_VOTE,
         techId: 0,
-        userId: 10
+        userId: '10'
       })
     ).toEqual([
         {
           id: 0,
           name: 'Initial',
           type: 'init',
-          votes: [10, 1]
+          votes: ['10', '1']
         },
         {
           id: 2,
           name: 't2',
           type: 'type',
-          votes: [11]
+          votes: ['11']
         }
       ]);
   });
 
-  it('should handle REMOVE_VOTE', () => {
+  it('should handle SWITCH_VOTE to remove votes', () => {
     expect(
       techs([
         {
           id: 0,
           name: 'Initial',
           type: 'init',
-          votes: [1]
+          votes: ['1']
         }
       ], {
-        type: types.REMOVE_VOTE,
+        type: types.SWITCH_VOTE,
         techId: 0,
-        userId: 1
+        userId: '1'
       })
     ).toEqual([
         {
@@ -151,31 +151,31 @@ describe('techs reducer', () => {
           id: 0,
           name: 'Initial',
           type: 'init',
-          votes: [1, 10]
+          votes: ['1', '10']
         },
         {
           id: 2,
           name: 't2',
           type: 'type',
-          votes: [11]
+          votes: ['11']
         }
       ], {
-        type: types.REMOVE_VOTE,
+        type: types.SWITCH_VOTE,
         techId: 0,
-        userId: 10
+        userId: '10'
       })
     ).toEqual([
         {
           id: 0,
           name: 'Initial',
           type: 'init',
-          votes: [1]
+          votes: ['1']
         },
         {
           id: 2,
           name: 't2',
           type: 'type',
-          votes: [11]
+          votes: ['11']
         }
       ]);
   });

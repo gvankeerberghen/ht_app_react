@@ -7,19 +7,14 @@ import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 
 import {
-  blue300,
-  indigo900,
-  orange200,
-  deepOrange300,
-  pink400,
-  purple500,
+  cyan300,
+  grey500
 } from 'material-ui/styles/colors';
 
 interface ITechItemProps {
   userId: string;
   tech: any;
-  addVote: (usedId: string, techId: number) => void;
-  removeVote: (usedId: string, techId: number) => void;
+  switchVote: (usedId: string, techId: number) => void;
 };
 
 interface ITechListItemState {};
@@ -37,19 +32,8 @@ class TechListItem extends React.Component<ITechItemProps, ITechListItemState> {
     return this.props.tech.votes.indexOf(this.props.userId) > -1;
   }
 
-  onClick = () => {
-    const techId = this.props.tech.id;
-    const userId = this.props.userId;
-
-    if (this.hasUserVote()) {
-      this.props.removeVote(userId, techId);
-    } else {
-      this.props.addVote(userId, techId);
-    }
-  }
- 
   render() {
-    const {tech} = this.props;
+    const {tech, userId, switchVote} = this.props;
     const hasUserVote = this.hasUserVote();
 
     return (
@@ -65,9 +49,9 @@ class TechListItem extends React.Component<ITechItemProps, ITechListItemState> {
           }
           rightIconButton={
             <IconButton
-              onClick={this.onClick}
+              onClick={() => switchVote(userId, tech.id)}
             >
-              <FontIcon className="material-icons">{hasUserVote ? 'clear' : 'add'}</FontIcon>
+              <FontIcon className='material-icons' color={hasUserVote ? cyan300 : grey500 }>bookmark</FontIcon>
             </IconButton>
           }
         />

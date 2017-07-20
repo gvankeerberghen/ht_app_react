@@ -11,8 +11,7 @@ function setup() {
       type: 'A tech',
       votes: ['1001']
     },
-    addVote: jasmine.createSpy('addVote'),
-    removeVote: jasmine.createSpy('removeVote')
+    switchVote: jasmine.createSpy('addVote')
   };
 
   const renderer = TestUtils.createRenderer();
