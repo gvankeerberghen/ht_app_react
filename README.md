@@ -22,8 +22,8 @@ in `conf/{webpack.conf.js,webpack-dist.conf.js,webpack-test.conf.js}` following
 ``gulp test``
 
 ## Ideas
-- add user management, e.g., connection with google account
-- allow logged in users to vote on resources
+- make look of user login bearable
+- create backend
 - add completed flag on techs
 - add ordering / filtering of techs, on type, number of votes, ...
 - show links to resources on a tech
