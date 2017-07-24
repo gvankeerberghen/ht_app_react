@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
+import TechCard from '../components/TechCard';
 import {addTech, deleteTech, editTech, switchVote} from '../actions/index';
 
 interface IAppProps {
@@ -22,14 +23,34 @@ class App extends React.Component<IAppProps, IAppState> {
 
   render() {
     const {userId, techs, actions} = this.props;
+
+    const styles = {
+      mainContainer: {
+        display: 'flex'
+      },
+      listContainer: {
+        flex: '2 2 0'
+      },
+      techCard: {
+        flex: '1 1 0'
+      }
+    }
+
     return (
       <div>
         <Header/>
-        <MainSection
-          userId={userId}
-          techs={techs}
-          actions={actions}
-          />
+        <div style={styles.mainContainer}>
+          <div style={styles.listContainer}>
+            <MainSection
+              userId={userId}
+              techs={techs}
+              actions={actions}
+              />
+          </div>
+          <div style={styles.techCard}>
+            <TechCard tech={techs[0]} />
+          </div>
+        </div>
       </div>
     );
   }
