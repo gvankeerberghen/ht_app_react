@@ -29,12 +29,15 @@ class App extends React.Component<IAppProps, IAppState> {
         display: 'flex'
       },
       listContainer: {
-        flex: '2 2 0'
+        flex: '1',
+        marginRight: '10px',
+        marginTop: '10px'
       },
       techCard: {
-        flex: '1 1 0'
+        flex: '2',
+        marginTop: '10px'
       }
-    }
+    };
 
     return (
       <div>

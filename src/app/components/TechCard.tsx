@@ -4,7 +4,10 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import {List, ListItem} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
-import FileFolder from 'material-ui/svg-icons/file/folder';
+import FontIcon from 'material-ui/FontIcon';
+import {typeIcons} from '../constants/LinksTypeIcons';
+
+import {blue300} from 'material-ui/styles/colors';
 
 interface IMainProps {
   tech: any;
@@ -34,40 +37,40 @@ class TechCard extends React.Component<IMainProps, IMainState> {
 
     return (
     <Paper>
-        <Card>
-            <CardHeader
-                title={tech.name}
-                subtitle={tech.type}
-            />
-            <CardText>
-                {tech.description}
-            </CardText>
-        </Card>
+      <Card>
+        <CardHeader
+            title={tech.name}
+            subtitle={tech.type}
+        />
+        <CardText>
+            {tech.description}
+        </CardText>
+      </Card> 
 
-        <Tabs>
-            <Tab label="Links" >
-            <div>
-                <h2 style={styles.headline as any}>Links</h2>
-                <List>
-                    {tech.links.map(link =>
-                      <ListItem
-                        leftAvatar={<Avatar icon={<FileFolder />} />}
-                        primaryText={link.name}
-                        secondaryText={link.description}
-                      />
-                    )}
-                  </List>
-            </div>
-            </Tab>
-            <Tab label="Reviews" >
-            <div>
-                <h2 style={styles.headline as any}>Opinions</h2>
-                <p>
-                  This is to be fillable.
-                </p>
-            </div>
-            </Tab>
-        </Tabs>
+      <Tabs>
+        <Tab label='Links'>
+          <List style={{ maxHeight: 500, overflow: 'scroll' as 'scroll'}}>
+            {tech.links.map(link =>
+              <ListItem
+                leftAvatar={<Avatar backgroundColor={blue300} icon={
+                  <FontIcon className='material-icons'>{typeIcons[link.type] || 'link'}</FontIcon>} />
+                }
+                primaryText={link.name}
+                secondaryText={link.description}
+                secondaryTextLines={2}
+              />
+            )}
+          </List>
+        </Tab>
+        <Tab label='Reviews' >
+        <div>
+            <h2 style={styles.headline as any}>Opinions</h2>
+            <p>
+              This is to be fillable.
+            </p>
+        </div>
+        </Tab>
+      </Tabs>
     </Paper>
     );
   }

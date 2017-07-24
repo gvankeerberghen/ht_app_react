@@ -45,7 +45,7 @@ class MainSection extends React.Component<IMainProps, IMainState> {
 
     return (
       <section className='main'>
-        <Paper>
+        <Paper style={{ maxHeight: 600, overflow: 'scroll' as 'scroll'}}>
           <List>
             {techs.map(tech =>
               <TechListItem
