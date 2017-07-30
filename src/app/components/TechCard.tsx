@@ -7,7 +7,7 @@ import Avatar from 'material-ui/Avatar';
 import FontIcon from 'material-ui/FontIcon';
 import {typeIcons} from '../constants/LinksTypeIcons';
 
-import {blue300} from 'material-ui/styles/colors';
+import {purple500} from 'material-ui/styles/colors';
 
 interface IMainProps {
   tech: any;
@@ -30,7 +30,7 @@ class TechCard extends React.Component<IMainProps, IMainState> {
       headline: {
         fontSize: 24,
         paddingTop: 16,
-        marginBottom: 12,
+        margin: 12,
         fontWeight: 400,
       },
     };
@@ -52,7 +52,7 @@ class TechCard extends React.Component<IMainProps, IMainState> {
           <List style={{ maxHeight: 500, overflow: 'scroll' as 'scroll'}}>
             {tech.links.map(link =>
               <ListItem
-                leftAvatar={<Avatar backgroundColor={blue300} icon={
+                leftAvatar={<Avatar backgroundColor={purple500} icon={
                   <FontIcon className='material-icons'>{typeIcons[link.type] || 'link'}</FontIcon>} />
                 }
                 primaryText={link.name}
@@ -64,10 +64,7 @@ class TechCard extends React.Component<IMainProps, IMainState> {
         </Tab>
         <Tab label='Reviews' >
         <div>
-            <h2 style={styles.headline as any}>Opinions</h2>
-            <p>
-              This is to be fillable.
-            </p>
+            <h2 style={styles.headline as any}>Coming soon...</h2>
         </div>
         </Tab>
       </Tabs>
