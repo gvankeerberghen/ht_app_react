@@ -14,6 +14,7 @@ interface ITechItemProps {
   userId: string;
   tech: any;
   switchVote: (usedId: string, techId: number) => void;
+  selectTech: (techId: number) => void;
 };
 
 interface ITechListItemState {};
@@ -32,13 +33,14 @@ class TechListItem extends React.Component<ITechItemProps, ITechListItemState> {
   }
 
   render() {
-    const {tech, userId, switchVote} = this.props;
+    const {tech, userId, switchVote, selectTech} = this.props;
     const hasUserVote = this.hasUserVote();
 
     return (
         <ListItem
           primaryText={tech.name}
           secondaryText={tech.type}
+          onClick={() => selectTech(tech.id)}
           leftAvatar={
             <Avatar
               size={30}

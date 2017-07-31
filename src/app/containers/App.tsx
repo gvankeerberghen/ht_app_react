@@ -5,12 +5,13 @@ import {connect} from 'react-redux';
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
 import TechCard from '../components/TechCard';
-import {addTech, deleteTech, editTech, switchVote} from '../actions/index';
+import {addTech, deleteTech, editTech, switchVote, selectTech} from '../actions/index';
 
 interface IAppProps {
   userId: string;
   techs?: any[];
   actions?: any;
+  selectedTechId: number;
 }
 
 interface IAppState {}
@@ -22,7 +23,7 @@ class App extends React.Component<IAppProps, IAppState> {
   };
 
   render() {
-    const {userId, techs, actions} = this.props;
+    const {userId, techs, actions, selectedTechId} = this.props;
 
     const styles = {
       mainContainer: {
@@ -51,7 +52,7 @@ class App extends React.Component<IAppProps, IAppState> {
               />
           </div>
           <div style={styles.techCard}>
-            <TechCard tech={techs[0]} />
+            <TechCard tech={techs.find( (tech) => tech.id === selectedTechId )} />
           </div>
         </div>
       </div>
@@ -62,7 +63,8 @@ class App extends React.Component<IAppProps, IAppState> {
 function mapStateToProps(state: any) {
   return {
     userId: state.user.id,
-    techs: state.techs
+    techs: state.techs,
+    selectedTechId: state.selections.selectedTechId
   };
 }
 
@@ -72,7 +74,8 @@ function mapDispatchToProps(dispatch: IDispatch) {
       addTech,
       deleteTech,
       editTech,
-      switchVote
+      switchVote,
+      selectTech
     }, dispatch)
   };
 }

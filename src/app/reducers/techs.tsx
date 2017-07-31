@@ -6,7 +6,7 @@ const initialState = [
     id: 1,
     name: 'Elm',
     type: 'Language',
-    description: 'A delightful language for reliable webapps. Generate JavaScript with great performance and no runtime exceptions. Boasts about JavaScript interop, no runtime exceptions, great performance and enforced semantic versioning.',
+    description: 'A delightful language for reliable webapps. Boasts about JavaScript interop, no runtime exceptions, great performance and enforced semantic versioning.',
     siteUrl: 'http://elm-lang.org/',
     votes: [
       '117572460453417284894',
@@ -22,14 +22,14 @@ const initialState = [
       {
         name: 'awesome-elm',
         url: 'https://github.com/isRuslan/awesome-elm',
-        type: 'Resources',
+        type: 'Links',
         description: 'A list of videos, examples, libraries, tools, etc. Probably even better than this list ;-)',
       },
       {
         name: ' Let\'s be mainstream! User focused design in Elm',
         url: 'https://www.youtube.com/watch?v=oYk8CKH7OhE',
         type: 'Info',
-        description: 'A talk from the creator of Elm, where he is specifically wondering how to get to the javascript community, with a typed,\' functional language',
+        description: 'A talk from the creator of Elm, where he is specifically wondering how to get to the javascript community with a typed, functional language',
       },
       {
         name: 'Make the Back-End Team Jealous: Elm in Production',
@@ -41,7 +41,7 @@ const initialState = [
         name: 'Toward a Better Front End Architecture: Elm',
         url: 'https://www.youtube.com/watch?v=EDp6UmaA9CM',
         type: 'Intro',
-        description: 'Jan. 2017 introduction video to give you a quick overview of the language:',
+        description: 'Jan. 2017 introduction video to give you a quick overview of the language',
       },
       {
         name: 'Code of elm architecture tutorial',
@@ -122,7 +122,7 @@ const initialState = [
       }, {
         name: 'React Ant Design',
         type: 'Tool',
-        description: 'A Set of React Components that Implement Ant Design.',
+        description: 'A Set of React Components that Implement Ant Design',
         siteUrl: 'https://ant.design/docs/react/introduce',
       }
     ],

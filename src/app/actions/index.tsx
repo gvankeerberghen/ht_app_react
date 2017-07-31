@@ -12,6 +12,10 @@ export function editTech(id: number, name: string) {
   return {type: types.EDIT_TECH, id, name};
 }
 
+export function selectTech(id: number) {
+  return {type: types.SELECT_TECH, id};
+}
+
 export function switchVote(userId: string, techId: number) {
   return {type: types.SWITCH_VOTE, userId, techId};
 }

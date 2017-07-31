@@ -11,7 +11,8 @@ function setup( votes = ['1001']) {
       type: 'A tech',
       votes: votes
     },
-    switchVote: jasmine.createSpy('addVote')
+    switchVote: jasmine.createSpy('addVote'),
+    selectTech: jasmine.createSpy('selectTech')
   };
 
   const renderer = TestUtils.createRenderer();
@@ -69,6 +70,13 @@ describe('components', () => {
       const button = output.props.rightIconButton;
       button.props.onClick();
       expect(props.switchVote).toHaveBeenCalledWith('10', 0);
+    });
+
+    it('onClick should call selectTech', () => {
+      const {output, props} = setup([]);
+      
+      output.props.onClick();
+      expect(props.selectTech).toHaveBeenCalledWith(0);
     });
   });
 });

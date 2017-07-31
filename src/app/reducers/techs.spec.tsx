@@ -4,22 +4,23 @@ import * as types from '../constants/ActionTypes';
 describe('techs reducer', () => {
   it('should handle initial state', () => {
     expect(
-      techs(undefined, {})[0]
+      techs(undefined, {})[2]
     ).toEqual({
-        id: 1,
-        name: 'Elm',
-        type: 'Language',
+        id: 3,
+        name: 'React-Native',
+        type: 'Mobile Framework',
+        description: 'React Native lets you build mobile apps using only JavaScript.' +
+          ' It uses the same design as React, letting you compose a rich mobile UI from declarative components.',
+        siteUrl: 'https://facebook.github.io/react-native/',
+        links: [],
         votes: [
           '117572460453417284894',
           '117572460453417284895',
           '117572460453417284896',
           '117572460453417284897',
-          '117572460453417284898',
-          '117572460453417284899',
-          '117572460453417284900',
-          '117572460453417284901'
+          '117572460453417284898'
         ]
-      });
+    });
   });
 
   it('should handle ADD_TECH', () => {

@@ -16,11 +16,18 @@ describe('techs actions', () => {
     });
   });
 
-  it('editTech should create EDIT_Tech action', () => {
+  it('editTech should create EDIT_TECH action', () => {
     expect(actions.editTech(1, 'Tech 2')).toEqual({
       type: types.EDIT_TECH,
       id: 1,
       name: 'Tech 2'
+    });
+  });
+
+  it('selectTech should create SELECT_TECH action', () => {
+    expect(actions.selectTech(13)).toEqual({
+      type: types.SELECT_TECH,
+      id: 13
     });
   });
 

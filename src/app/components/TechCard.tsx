@@ -4,6 +4,7 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import {List, ListItem} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
+import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import {typeIcons} from '../constants/LinksTypeIcons';
 
@@ -45,6 +46,18 @@ class TechCard extends React.Component<IMainProps, IMainState> {
         <CardText>
             {tech.description}
         </CardText>
+        <CardActions style={{textAlign: 'right' }}>
+          <IconButton
+            iconStyle={{width: 20, height: 20}}
+            style={{width: 30, height: 30, padding: 10}}
+            iconClassName='material-icons'
+            tooltip='Open home page'
+            tooltipPosition='bottom-left'
+            onClick={() => window.open(tech.siteUrl)}
+          >
+            open_in_new
+        </IconButton>
+       </CardActions>
       </Card> 
 
       <Tabs>
@@ -52,6 +65,7 @@ class TechCard extends React.Component<IMainProps, IMainState> {
           <List style={{ maxHeight: 500, overflow: 'scroll' as 'scroll'}}>
             {tech.links.map(link =>
               <ListItem
+                onClick={() => window.open(link.url)}
                 leftAvatar={<Avatar backgroundColor={purple500} icon={
                   <FontIcon className='material-icons'>{typeIcons[link.type] || 'link'}</FontIcon>} />
                 }

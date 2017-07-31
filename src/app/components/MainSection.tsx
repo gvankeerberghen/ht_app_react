@@ -53,6 +53,7 @@ class MainSection extends React.Component<IMainProps, IMainState> {
                 userId={userId}
                 tech={tech}
                 switchVote={actions.switchVote}
+                selectTech={actions.selectTech}
                 />
             )}
           </List>

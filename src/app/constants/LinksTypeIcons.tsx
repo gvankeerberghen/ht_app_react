@@ -1,5 +1,5 @@
 export const typeIcons = {
-  Resources: 'extension',
+  Tool: 'extension',
   Info: 'info',
   Intro: 'school',
   'Source code': 'code',
